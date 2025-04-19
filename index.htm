@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Test Pemrograman</title>
+  
+  <link rel="stylesheet" href="style.css">
+
+  <script type="module" src="https://unpkg.com/@google/model-viewer/dist/model-viewer.min.js"></script>
+</head>
+<body>
+  <header>
+    <img src="Welcome.png" alt="Welcome" class="welcome-img" />
+    <nav>
+      <ul>
+        <li><a href="#about" style="--clr: #eee;"><img src="About.png" alt="About" class="nav-icon" /></a></li>
+        <li><a href="#content" style="--clr: #1DA1F2;"><img src="Content.png" alt="Content" class="nav-icon" /></a></li>
+        <li><a href="#profile" style="--clr: #f00;"><img src="Profile.png" alt="Profile" class="nav-icon" /></a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main>
+    <section id="content" class="content">
+      <div class="box">
+        <h3>Operasi Hewan Peliharaan</h3>
+        <p>Gunakan tombol-tombol berikut untuk memanipulasi data:</p>
+        <div class="button-group">
+          <button onclick="tambahHewan()">Tambah Hewan</button>
+          <button onclick="filterHewan()">Filter Favorit</button>
+          <button onclick="gantiRas()">Ganti Ras Persia</button>
+          <button onclick="hitungJenis()">Hitung Jenis</button>
+          <button onclick="cekPalindrom()">Cek Palindrom</button>
+          <button onclick="cekModulo()">Modulo Bilangan</button>
+          <button onclick="cekAnagram()">Cek Anagram</button>
+        </div>
+      </div>
+    </section>
+
+    <div class="output">
+      <h3>Hasil:</h3>
+      <pre id="output">Klik salah satu tombol di atas untuk menampilkan data...</pre>
+    </div>
+  </main>
+
+  <model-viewer 
+    src="cats_on_a_fridge.glb"
+    alt="Model 3D kucing di atas kulkas"
+    auto-rotate
+    camera-controls
+    class="floating-model">
+  </model-viewer>
+
+  <footer>
+    <p>Bagikan artikel ini melalui:</p>
+    <ul class="social-links">
+      <li><img src="twitter.png" alt="Twitter" /> Twitter</li>
+      <li><img src="facebook.png" alt="Facebook" /> Facebook</li>
+    </ul>
+  </footer>
+
+  <script type="module">
+    import { 
+        tambah,
+        filter1,
+        ganti,
+        hitung,
+        palindrom,
+        modulo,
+        anagram
+    } from './fungsi.js';
+
+    const displayOutput = (data) => {
+        const outputElement = document.getElementById("output");
+        try {
+            outputElement.textContent = JSON.stringify(data, null, 2);
+        } catch {
+            outputElement.textContent = String(data);
+        }
+    };
+
+    window.tambahHewan = () => {
+        const result = tambah("badak jawa", "", "Rino", "pekerja keras dan kesayangan esa");
+        displayOutput(result);
+    };
+
+    window.filterHewan = () => {
+        displayOutput(filter1());
+    };
+
+    window.gantiRas = () => {
+        displayOutput(ganti("mine tycoon"));
+    };
+
+    window.hitungJenis = () => {
+        displayOutput(hitung());
+    };
+
+    window.cekPalindrom = () => {
+        displayOutput(palindrom());
+    };
+
+    window.cekModulo = () => {
+        displayOutput(modulo(15, 18, 3, 9, 6, 2, 12, 14));
+    };
+
+    window.cekAnagram = () => {
+        displayOutput(anagram("asing", "siang"));
+    };
+</script>
+</body>
+</html>
